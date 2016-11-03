@@ -2,14 +2,28 @@
 <html ng-app="store">
 	<head>
 		<link rel="stylesheet" type="text/css" href="bootstrap-3.3.7-dist/css/bootstrap.min.css">
+		<style type="text/css">
+			.ng-invalid.ng-dirty{
+				border-color: #FA787E;
+			}
+
+			.ng-valid.ng-dirty {
+				border-color: #78FA89;
+			}
+		</style>
 	</head>
 	<body ng-controller="StoreController as store">
 		<h1>Gems Store <small>By Daniel Correa</small></h1><hr>
 		<div class="list-group">
-			<div class="list-group-item" ng-repeat="product in store.products | orderBy: '-price'" ng-hide="product.soldOut">
+			<strong>Options: </strong>
+			<button class="btn btn-md btn-warning" ng-click="store.sort()"> 
+			<span class="glyphicon {{store.icon}}"></span> Order 
+			</button>
+			<hr>
+			<div class="list-group-item" ng-repeat="product in store.products | orderBy: '-price':store.type" ng-hide="product.soldOut">
 				<h1>{{product.name}}</h1>
 				
-				<h2><img ng-src="{{product.images[0].full}}" width="50px" height="50px" /> <i>{{product.price | currency}} </i> <button class="btn btn-info" ng-show="product.canPurchase">Add to Cart</button></h2>	
+			<h2><img ng-src="{{product.images[0].full}}" width="80px" height="80px" /> <i>{{product.price | currency}} </i> <button class="btn btn-default" ng-show="product.canPurchase"> <span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart</button></h2>	
 				<section ng-controller="PanelController as panel">
 					<ul class="nav nav-pills">
 						<li ng-class="{ active:panel.tab === 1 }"><a href ng-click="panel.selectTab(1)">Description</a></li>
@@ -26,7 +40,40 @@
 					</div>
 					<div class="panel" ng-show="panel.tab === 3">
 						<h4>Reviews</h4>
-						<blockquote>Not yet</blockquote>
+						<blockquote ng-repeat="review in product.reviews">
+							<b>Stars: {{review.stars}}</b> <br>
+							{{review.body}} <br>
+							<cite>by: {{review.author}}</cite><br>
+						</blockquote>
+						<h4> Send your review</h4>
+						<form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewForm.$valid && reviewCtrl.addReview(product)" novalidate>
+							<blockquote>
+								<b>Stars: {{reviewCtrl.review.stars}}</b> <br>
+								{{reviewCtrl.review.body}} <br>
+								<cite>by: {{reviewCtrl.review.author}} <span ng-if="!reviewForm.$valid" style="color:red;">Invalid value</span></cite><br>
+							</blockquote>
+							<div> <b>reviewForm is {{reviewForm.$valid}}</b></div>
+							<div class="form-group">
+								<label>Stars:</label>
+								<select ng-model="reviewCtrl.review.stars" class="form-control" required>
+									<option value="1">1 star</option>
+									<option value="2">2 stars</option>
+									<option value="3">3 stars</option>
+									<option value="4">4 stars</option>
+									<option value="5">5 stars</option>
+								</select>	
+							</div>
+							<div class="form-group">
+								<label>Comment:</label>
+								<textarea class="form-control" placeholder="comment" ng-model="reviewCtrl.review.body" required></textarea>
+							</div>
+							<div class="form-group">
+								<label>Email:</label>
+								<input ng-model="reviewCtrl.review.author" class="form-control" type="email" placeholder="email" required />
+							</div>
+
+							<button class="btn btn-md btn-primary" type="submit" ng-disabled="!reviewForm.$valid" >Send</button>
+						</form>
 					</div>
 				</section>
 			</div>

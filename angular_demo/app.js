@@ -3,6 +3,16 @@
 	
 	app.controller('StoreController', function(){
 		this.products = gems;
+		this.type = false;
+		this.icon = 'glyphicon-chevron-down'
+		this.sort = function(){
+			this.type = !this.type;
+			if (this.type){
+				this.icon = 'glyphicon-chevron-up';
+			}else{
+				this.icon = 'glyphicon-chevron-down';
+			}
+		}
 	});
 
 	app.controller('PanelController', function(){
@@ -11,6 +21,23 @@
 		this.selectTab = function(setTab){
 			this.tab = setTab;
 		}
+	});
+
+	app.controller('ReviewController', function(){
+
+		empty_review = {
+			stars: '5',
+			body: 'Not Yet',
+			author: 'not@yet.com'
+		}; 
+
+		this.review = empty_review;
+
+		this.addReview = function(product){
+			product.reviews.push(this.review);
+			this.review = empty_review;
+		};
+
 	});
 
 	var gems = [
@@ -25,6 +52,13 @@
 					full:'images/gem1.svg',
 					thumb: ''
 				}
+			],
+			reviews : [
+				{
+					stars: 5,
+					body: 'Great gem dude',
+					author: 'joe@gems.com'
+				}
 			]
 		},
 		{
@@ -37,6 +71,13 @@
 				{
 					full:'images/gem2.png',
 					thumb: ''
+				}
+			],
+			reviews : [
+				{
+					stars: 3,
+					body: 'Normal gem for any purpose',
+					author: 'dael@gems.com'
 				}
 			]
 		},
@@ -51,6 +92,13 @@
 					full:'images/gem3.jpg',
 					thumb: ''
 				}
+			],
+			reviews : [
+				{
+					stars: 2,
+					body: 'So expensive',
+					author: 'doe@gems.com'
+				}
 			]
 		},
 		{
@@ -63,6 +111,13 @@
 				{
 					full:'images/gem4.jpg',
 					thumb: ''
+				}
+			],
+			reviews : [
+				{
+					stars: 4,
+					body: 'Awesome!',
+					author: 'tim@gems.com'
 				}
 			]
 		}
