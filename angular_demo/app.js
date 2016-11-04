@@ -1,6 +1,7 @@
 (function(){
 	var app = angular.module('store', []);
 	
+	//Controlllers
 	app.controller('StoreController', function(){
 		this.products = gems;
 		this.type = false;
@@ -15,13 +16,13 @@
 		}
 	});
 
-	app.controller('PanelController', function(){
+	var panelController = function(){
 		this.tab = 1;
 
 		this.selectTab = function(setTab){
 			this.tab = setTab;
 		}
-	});
+	};
 
 	app.controller('ReviewController', function(){
 
@@ -40,6 +41,31 @@
 
 	});
 
+	//Directives
+	app.directive('productTitle', function(){
+		return {
+			restrict: 'A',
+			templateUrl: 'product-title.html'
+		}
+	});
+
+	app.directive('productPanels', function(){
+		return {
+			restrict: 'E',
+			templateUrl: 'product-panels.html',
+			controller: panelController,
+			controllerAs: 'panel'
+		}
+	});
+
+	app.directive('productInformation', function(){
+		return {
+			restrict: 'E',
+			templateUrl: 'product-information.html'
+		}
+	});
+
+	//Objects
 	var gems = [
 		{
 			name: 'Dodecahedron',
