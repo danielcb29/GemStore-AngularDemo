@@ -1,28 +1,28 @@
 (function(){
-	var app = angular.module('store', []);
+	var app = angular.module('store', ['store-products']);
 	
 	//Controlllers
-	app.controller('StoreController', function(){
-		this.products = gems;
-		this.type = false;
-		this.icon = 'glyphicon-chevron-down'
-		this.sort = function(){
-			this.type = !this.type;
-			if (this.type){
-				this.icon = 'glyphicon-chevron-up';
+	app.controller('StoreController', ['$http', function($http){
+
+		var store = this;
+
+		store.products = [];
+
+		$http.get('/products.json').success(function(data){
+			store.products = data;	
+		});
+
+		store.type = false;
+		store.icon = 'glyphicon-chevron-down'
+		store.sort = function(){
+			store.type = !store.type;
+			if (store.type){
+				store.icon = 'glyphicon-chevron-up';
 			}else{
-				this.icon = 'glyphicon-chevron-down';
+				store.icon = 'glyphicon-chevron-down';
 			}
 		}
-	});
-
-	var panelController = function(){
-		this.tab = 1;
-
-		this.selectTab = function(setTab){
-			this.tab = setTab;
-		}
-	};
+	}]);
 
 	app.controller('ReviewController', function(){
 
@@ -39,30 +39,6 @@
 			this.review = empty_review;
 		};
 
-	});
-
-	//Directives
-	app.directive('productTitle', function(){
-		return {
-			restrict: 'A',
-			templateUrl: 'product-title.html'
-		}
-	});
-
-	app.directive('productPanels', function(){
-		return {
-			restrict: 'E',
-			templateUrl: 'product-panels.html',
-			controller: panelController,
-			controllerAs: 'panel'
-		}
-	});
-
-	app.directive('productInformation', function(){
-		return {
-			restrict: 'E',
-			templateUrl: 'product-information.html'
-		}
 	});
 
 	//Objects
