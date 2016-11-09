@@ -1,7 +1,7 @@
 <div class="row">
 	<h1 product-title></h1>
-	<b class="pull-right">Items selected: 0</b><br>
-	<button class="btn btn-default pull-right" ng-show="product.canPurchase"> <span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart</button>
+	<b class="pull-right">Items selected: {{product.itemsSold}}</b><br>
+	<button class="btn btn-default pull-right" ng-show="product.canPurchase" ng-click="store.buy(product)" > <span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart</button>
 	<br>
 	<img class="img-responsive center-block" ng-src="{{product.images[0].full}}" width="280px" height="280px" />
 	<br>

@@ -6,6 +6,8 @@
 
 		var store = this;
 
+		store.allSold = 0;
+
 		store.products = [];
 
 		$http.get('/products.json').success(function(data){
@@ -21,6 +23,12 @@
 			}else{
 				store.icon = 'glyphicon-chevron-down';
 			}
+		}
+
+		store.buy = function(product){
+			product.itemsSold++;
+			store.allSold++;
+
 		}
 	}]);
 
@@ -49,6 +57,7 @@
 			description: 'This is a classic gem',
 			canPurchase: true,
 			soldOut: false,
+			itemsSold: 0,
 			images: [
 				{
 					full:'images/gem1.svg',
@@ -69,6 +78,7 @@
 			description: 'This gem is sheap',
 			canPurchase: true,
 			soldOut: false,
+			itemsSold: 0,
 			images: [
 				{
 					full:'images/gem2.png',
@@ -89,6 +99,7 @@
 			description: 'This is a awesome gem',
 			canPurchase: true,
 			soldOut: false,
+			itemsSold: 0,
 			images: [
 				{
 					full:'images/gem3.jpg',
@@ -109,6 +120,7 @@
 			description: '+ of normal gem',
 			canPurchase: true,
 			soldOut: false,
+			itemsSold: 0,
 			images: [
 				{
 					full:'images/gem4.jpg',
