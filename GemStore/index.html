@@ -11,6 +11,7 @@
 			<button class="btn btn-md btn-warning" ng-click="store.sort()"> 
 			<span class="glyphicon {{store.icon}}"></span> Order 
 			</button>
+			<b class="pull-right">Total items selected: 0</b>
 			<hr>
 			<div class="list-group-item" ng-repeat="product in store.products | orderBy: '-price':store.type" ng-hide="product.soldOut">
 				<product-information>
