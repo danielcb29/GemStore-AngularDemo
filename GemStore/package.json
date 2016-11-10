@@ -1,0 +1,31 @@
+{
+  "name": "gem-store-danielcb",
+  "version": "1.0.0",
+  "description": "This projects contains the first implementation of module 2 of alert logic course",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ws -s -p 8888"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/danielcb29/GemStore-AngularDemo.git"
+  },
+  "keywords": [
+    "Gems",
+    "Store",
+    "Angular",
+    "Store"
+  ],
+  "author": "Daniel Correa <danielc.web@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danielcb29/GemStore-AngularDemo/issues"
+  },
+  "homepage": "https://github.com/danielcb29/GemStore-AngularDemo#readme",
+  "dependencies": {
+    "angular": "^1.5.8",
+    "bootstrap": "^3.3.7",
+    "ngstorage": "^0.3.11"
+  }
+}

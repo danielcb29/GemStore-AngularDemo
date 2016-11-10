@@ -8,7 +8,7 @@
 		"itemsSold": 0,
 		"images": [
 			{
-				"full":"images/gem1.svg",
+				"full":"static/img/gem1.svg",
 				"thumb": ""
 			}
 		],
@@ -29,7 +29,7 @@
 		"itemsSold": 0,
 		"images": [
 			{
-				"full":"images/gem2.png",
+				"full":"static/img/gem2.png",
 				"thumb": ""
 			}
 		],
@@ -50,7 +50,7 @@
 		"itemsSold": 0,
 		"images": [
 			{
-				"full":"images/gem3.jpg",
+				"full":"static/img/gem3.jpg",
 				"thumb": ""
 			}
 		],
@@ -71,7 +71,7 @@
 		"itemsSold": 0,
 		"images": [
 			{
-				"full":"images/gem4.jpg",
+				"full":"static/img/gem4.jpg",
 				"thumb": ""
 			}
 		],

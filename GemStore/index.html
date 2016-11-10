@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html ng-app="store">
 	<head>
-		<link rel="stylesheet" type="text/css" href="bootstrap-3.3.7-dist/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="css/styles.css">   
+		<link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="static/css/styles.css">   
 	</head>
 	<body ng-controller="StoreController as store">
 		<h1>Gems Store <small>By Daniel Correa</small></h1><hr>			
@@ -22,8 +22,10 @@
 			</div>
 		</div>
 		<!--Scripts JS-->
-		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+		<script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
+		<script type="text/javascript" src="node_modules/ngStorage/ngStorage.min.js"></script>
+		<script type="text/javascript" src="src/product/product.js"></script>
 		<script type="text/javascript" src="app.js"></script>
-		<script type="text/javascript" src="product.js"></script>
+		<script type="text/javascript" src="services.js"></script>
 	</body>
 </html>

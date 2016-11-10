@@ -5,7 +5,7 @@
 	app.directive('productTitle', function(){
 		return {
 			restrict: 'A',
-			templateUrl: 'product-title.html'
+			templateUrl: './src/product/product-title.html'
 		}
 	});
 
@@ -17,19 +17,29 @@
 		}
 	};
 
+	var addToCart = function(){
+		this
+	};
+
 	app.directive('productPanels', function(){
 		return {
 			restrict: 'E',
-			templateUrl: 'product-panels.html',
+			templateUrl: './src/product/product-panels.html',
 			controller: panelController,
 			controllerAs: 'panel'
 		}
 	});
 
-	app.directive('productInformation', function(){
+	app.directive('productInformation', function(localStorageHandler){
 		return {
 			restrict: 'E',
-			templateUrl: 'product-information.html'
+			templateUrl: './src/product/product-information.html'
+			controller: function(){
+				this.addToCart = function(product){
+					localStorageHandler.setProduct(product);
+				};
+			},
+			controllerAs: 'title'
 		}
 	});
 
