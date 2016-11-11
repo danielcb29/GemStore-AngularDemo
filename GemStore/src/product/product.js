@@ -17,10 +17,6 @@
 		}
 	};
 
-	var addToCart = function(){
-		this
-	};
-
 	app.directive('productPanels', function(){
 		return {
 			restrict: 'E',
@@ -33,7 +29,7 @@
 	app.directive('productInformation', function(localStorageHandler){
 		return {
 			restrict: 'E',
-			templateUrl: './src/product/product-information.html'
+			templateUrl: './src/product/product-information.html',
 			controller: function(){
 				this.addToCart = function(product){
 					localStorageHandler.setProduct(product);
