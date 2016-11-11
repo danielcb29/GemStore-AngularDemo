@@ -2,16 +2,15 @@
 	var app = angular.module('store', ['store-products', 'ngStorage', 'store-services']);
 	
 	//Controlllers
-	app.controller('StoreController', ['$http', 'localStorageHandler', function($http, localStorageHandler){
+	app.controller('StoreController', ['localStorageHandler', 'dataStorage', function(localStorageHandler, dataStorage){
 
 		var store = this;
 
 		store.allSold = 0;
 
-		store.products = [];
-
-		$http.get('/data/products.json').success(function(data){
-			store.products = data;	
+		dataStorage.getElements().then(function(response){
+			console.log("response controller", response);
+			store.products = response;	
 		});
 
 		store.type = false;
@@ -30,6 +29,9 @@
 			store.allSold++;
 
 		}
+
+		store.productsInCart = localStorageHandler.getProducts();
+
 	}]);
 
 	app.controller('ReviewController', function(){

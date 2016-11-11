@@ -13,6 +13,22 @@
 			},
 			removeProduct: function(index){
 				$localStorage.products.splice(index, 1);
+			},
+			totalProducts: function(){
+				return $localStorage.products.length;
+			}
+		}
+	}]);
+
+
+	app.service('dataStorage', ['$http', function($http){
+		return{
+			getElements: function(){
+				return $http.get('./data/products.json').then(function(response){
+					return response.data;	
+				}, function(err){
+					return [];
+				});
 			}
 		}
 	}]);
