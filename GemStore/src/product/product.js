@@ -39,4 +39,10 @@
 		}
 	});
 
+	app.filter('cutText', function(){
+		return function(text){
+			return text.substring(0, 200) + '...';
+		}
+	});
+
 })();

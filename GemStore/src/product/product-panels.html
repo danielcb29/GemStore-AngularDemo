@@ -6,7 +6,7 @@
 	</ul>
 	<div class="panel" ng-show="panel.tab === 1">
 		<h4>Description</h4>
-		<blockquote>{{product.description}}</blockquote>
+		<blockquote>{{product.description | cutText }}</blockquote>
 	</div>
 	<div class="panel" ng-show="panel.tab === 2">
 		<h4>Specifications</h4>
