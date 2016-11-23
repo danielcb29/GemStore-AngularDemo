@@ -1,6 +1,23 @@
 (function(){
-	var app = angular.module('store', ['store-products', 'ngStorage', 'store-services']);
+	var app = angular.module('store', ['store-products', 'ngStorage', 'ngRoute', 'store-services']);
 	
+
+	app.config(['$routeProvider', function config($routeProvider){
+		$routeProvider.when('/', {
+			templateUrl: 'src/templates/dashboard.html',
+			controller: 'StoreController',
+			controllerAs: 'store'
+
+		});
+		$routeProvider.when('/product/:id', {
+			templateUrl: 'src/templates/detail.html',
+			controller: 'DetailController',
+			controllerAs: 'detail'
+
+		});
+		$routeProvider.otherwise('/');
+	}]);
+
 	//Controlllers
 	app.controller('StoreController', ['localStorageHandler', 'dataStorage', function(localStorageHandler, dataStorage){
 
@@ -50,6 +67,16 @@
 		};
 
 	});
+
+	app.controller('DetailController', ['$scope', '$routeParams', '$location', function($scope, $routeParams, $location){
+		$scope.test = "Hello";
+		console.log($routeParams);
+
+		$scope.goDashboard = function(){
+			$location.path("/");
+		}
+	}]);
+		
 
 })();
 

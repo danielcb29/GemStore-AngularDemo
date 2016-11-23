@@ -4,26 +4,14 @@
 		<link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="static/css/styles.css">   
 	</head>
-	<body ng-controller="StoreController as store">
-		<h1>Gems Store <small>By Daniel Correa</small></h1><hr>			
-		<div class="list-group">
-			<strong>Options: </strong>
-			<button class="btn btn-md btn-warning" ng-click="store.sort()"> 
-			<span class="glyphicon {{store.icon}}"></span> Order 
-			</button>
-			<b class="pull-right">Total items selected: {{store.productsInCart.length}}</b><br>
-			<hr>
-			<div class="list-group-item" ng-repeat="product in store.products | orderBy: '-price':store.type" ng-hide="product.soldOut">
-				<product-information>
-				</product-information>
-				
-				<product-panels>
-				</product-panels>
-			</div>
-		</div>
+	<body>
+		<ng-view>
+		</ng-view>
+		
 		<!--Scripts JS-->
 		<script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
 		<script type="text/javascript" src="node_modules/ngStorage/ngStorage.min.js"></script>
+		<script type="text/javascript" src="node_modules/angular-route/angular-route.min.js"></script>
 		<script type="text/javascript" src="src/product/product.js"></script>
 		<script type="text/javascript" src="app.js"></script>
 		<script type="text/javascript" src="services.js"></script>
