@@ -1,6 +1,10 @@
 (function(){
 	var app = angular.module('store', ['store-products', 'ngStorage', 'ngRoute', 'store-services']);
 	
+	app.constant('configTmdb', {
+		apiUri: 'https://api.themoviedb.org/3/',
+		apiKey: '6dc0d2605088c01254ffedbd444bc2e4'
+	});
 
 	app.config(['$routeProvider', function config($routeProvider){
 		$routeProvider.when('/', {
@@ -68,12 +72,48 @@
 
 	});
 
-	app.controller('DetailController', ['$scope', '$routeParams', '$location', function($scope, $routeParams, $location){
+	app.controller('DetailController', ['$scope', '$routeParams', '$location', 'tmdb', '$timeout', function($scope, $routeParams, $location, tmdb, $timeout){
 		$scope.test = "Hello";
-		console.log($routeParams);
+
+		var timeoutSearch = '';
+		$scope.$watch('test', function(newSearch, oldSearch){
+
+			if(timeoutSearch){
+				$timeout.cancel(timeoutSearch);
+			}
+			timeoutSearch = $timeout(function(){
+				$scope.executeSearch();
+			}, 1000);
+		});
+
+		$scope.executeSearch = function(){
+			console.log('ejecucion busqueda');
+			console.log($scope.test);
+		}
 
 		$scope.goDashboard = function(){
 			$location.path("/");
+		}
+
+		$scope.getPopularMovies = function(){
+			var moviesPopupar = tmdb.getPopular('movie/popular', '&language=en-US&page=2');
+			moviesPopupar.then(function(response){
+				$scope.moviesPopupar = response.data;
+			}, function(err){
+				console.log("Errorsini");
+				console.log(err);
+			});
+		}
+
+		$scope.getAllMovies = function() {
+			var getAll = tmdb.getAll();
+
+			getAll.then(function(response){
+				console.log(response);
+			}, function(err){
+				console.log(err);
+			});
+			
 		}
 	}]);
 		
