@@ -22,8 +22,33 @@
 		$routeProvider.otherwise('/');
 	}]);
 
+	app.run(function($rootScope){
+		$rootScope.$on('$routeChangeStart', function(event, next, current){
+			console.log('$routeChangeStart');
+			console.log(event);
+			console.log(next);
+			console.log(current);
+		});
+
+		$rootScope.$on('$routeChangeSuccess', function(event, current, previous){
+			console.log('$routeChangeSuccess');
+			console.log(event);
+			console.log(current);
+			console.log(previous);
+		});
+
+		$rootScope.$on('$routeChangeError', function(event, current, previous, rejection){
+			console.log('$routeChangeError');
+			console.log(event);
+			console.log(current);
+			console.log(previous);
+			console.log(rejection);
+		});
+	});
+
 	//Controlllers
-	app.controller('StoreController', ['localStorageHandler', 'dataStorage', function(localStorageHandler, dataStorage){
+	app.controller('StoreController', ['localStorageHandler', 'dataStorage', '$scope', '$location', function(localStorageHandler, dataStorage, $scope, $location){
+
 
 		var store = this;
 
@@ -52,6 +77,17 @@
 		}
 
 		store.productsInCart = localStorageHandler.getProducts();
+		store.sentMsn = function(){
+			$scope.$broadcast('broadcastTest', {test: 'ok'});
+		}
+
+		store.redirect = function(){
+			$location.path('product/1');
+		}
+
+		$scope.$on('broadcastParent', function(event, data){
+			console.log(data);
+		});
 
 	}]);
 
@@ -72,8 +108,15 @@
 
 	});
 
-	app.controller('DetailController', ['$scope', '$routeParams', '$location', 'tmdb', '$timeout', function($scope, $routeParams, $location, tmdb, $timeout){
+	app.controller('DetailController', ['$scope', '$routeParams', '$location', 'tmdb', '$timeout', '$rootScope', function($scope, $routeParams, $location, tmdb, $timeout, $rootScope){
 		$scope.test = "Hello";
+
+		$rootScope.$on('$routeChangeStart', function(event, next, current){
+			console.log(event);
+			console.log(next);
+			console.log(current);
+		});
+
 
 		var timeoutSearch = '';
 		$scope.$watch('test', function(newSearch, oldSearch){
